@@ -13,6 +13,6 @@ class Controller404 implements RulesForControllers
 
     function ActionView()
     {
-        include __DIR__ . "/../Views/list-tag.php";
+        include __DIR__ . "/../Views/404.php";
     }
 }

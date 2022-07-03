@@ -21,4 +21,7 @@ class TagModel extends \Core\Db
 
         return $array;
     }
+    public function Insert($name){
+        $this->db->DbQuery("INSERT INTO `tags`(`id`,`tagsTitle`) VALUES (NULL,'$name')");
+    }
 }

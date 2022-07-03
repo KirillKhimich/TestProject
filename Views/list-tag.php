@@ -1,6 +1,6 @@
 
             <h1 class="my-md-5 my-4">Теги</h1>
-            <a class="btn btn-primary mb-4" href="#" role="button">Добавить</a>
+            <a class="btn btn-primary mb-4" href="create-tag" role="button">Добавить</a>
             <div class="row">
                 <div class="col-md-6">
                     <ul class="list-group mb-4">

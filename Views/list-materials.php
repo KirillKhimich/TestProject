@@ -1,6 +1,6 @@
 
             <h1 class="my-md-5 my-4">Материалы</h1>
-            <a class="btn btn-primary mb-4" href="#" role="button">Добавить</a>
+            <a class="btn btn-primary mb-4" href="create-material" role="button">Добавить</a>
             <div class="row">
                 <div class="col-md-8">
                     <form>
@@ -27,7 +27,7 @@
                     <?php foreach ($material as $key => $value):?>
 
                     <tr>
-                        <td><a href="view-material.php"><?=$value['title']?></a></td>
+                        <td><a href="view-material?id=<?=$value['id']?>"><?=$value['title']?></a></td>
                         <td><?=$value['author']?></td>
                         <td><?=$value['categoryTitle']?></td>
                         <td><?=$value['typeTitle']?></td>
