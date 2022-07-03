@@ -1,21 +1,18 @@
 <?php
-$routes = [
-    "view-material",
-    "create-tag",
-    "create-category",
-    "create-material",
-    "list-category",
-    "list-materials",
-    "list-tag"
-];
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-include_once "views/header.php";
+$routes = [
+    "view-material" => "",
+    "create-tag"=> "",
+    "create-category" => "",
+    "create-material" => "",
+    "list-category" => "Controllers\CategoryController",
+    "list-materials" => "Controllers\MaterialController",
+    "list-tag" => "Controllers\TagController"
+];
+include_once "Views/header.php";
 
-$db = new \Classes\Db();
+$router = new \Core\Router($routes);
 
-$router = new \Classes\Router($routes);
-
-include_once "views/footer.php";
+include_once "Views/footer.php";
 

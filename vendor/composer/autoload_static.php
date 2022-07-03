@@ -7,22 +7,42 @@ namespace Composer\Autoload;
 class ComposerStaticInitdb8a3bc4518e9eb78c292c9ffaf4a07c
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'Models\\' => 7,
+        ),
         'C' => 
         array (
-            'Classes\\' => 8,
+            'Core\\' => 5,
+            'Controllers\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Classes\\' => 
+        'Models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/classes',
+            0 => __DIR__ . '/../..' . '/Models',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Core',
+        ),
+        'Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Controllers',
         ),
     );
 
     public static $classMap = array (
-        'Classes\\Router' => __DIR__ . '/../..' . '/classes/Router.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Controllers\\CategoryController' => __DIR__ . '/../..' . '/Controllers/CategoryController.php',
+        'Controllers\\Controller404' => __DIR__ . '/../..' . '/Controllers/Controller404.php',
+        'Controllers\\MaterialController' => __DIR__ . '/../..' . '/Controllers/MaterialController.php',
+        'Controllers\\RulesForControllers' => __DIR__ . '/../..' . '/Controllers/RulesForControllers.php',
+        'Core\\Db' => __DIR__ . '/../..' . '/Core/Db.php',
+        'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
+        'Models\\CategoryModel' => __DIR__ . '/../..' . '/Models/CategoryModel.php',
+        'Models\\MaterialModel' => __DIR__ . '/../..' . '/Models/MaterialModel.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

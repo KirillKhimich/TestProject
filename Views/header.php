@@ -27,13 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?=$routes[0]?>">Материалы</a>
+                    <a class="nav-link active" aria-current="page" href="list-materials">Материалы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=$routes[6]?>">Теги</a>
+                    <a class="nav-link" href="list-tag">Теги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=$routes[4]?>">Категории</a>
+                    <a class="nav-link" href="list-category">Категории</a>
             </ul>
         </div>
     </div>
