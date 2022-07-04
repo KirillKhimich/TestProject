@@ -27,7 +27,7 @@
                     <?php foreach ($material as $key => $value):?>
 
                     <tr>
-                        <td><a href="view-material?id=<?=$value['id']?>"><?=$value['title']?></a></td>
+                        <td><a href="view-material?viewMaterialId=<?=$value['id']?>"><?=$value['title']?></a></td>
                         <td><?=$value['author']?></td>
                         <td><?=$value['categoryTitle']?></td>
                         <td><?=$value['typeTitle']?></td>

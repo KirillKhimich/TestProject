@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-$id = $_GET['id'];
+$viewMaterialId = $_GET['viewMaterialId'];
 $routes = [
-    "creat-tag"=> "Controllers\CreateTagController",
+    "create-tag"=> "Controllers\CreateTagController",
     "create-category" => "Controllers\CreateCategoryController",
     "create-material" => "Controllers\CreateMaterialController",
     "list-category" => "Controllers\CategoryController",
     "list-materials" => "Controllers\MaterialController",
     "list-tag" => "Controllers\TagController",
-    "view-material?id=$id" => "Controllers\ViewMaterialController",
+    "view-material?viewMaterialId=$viewMaterialId" => "Controllers\ViewMaterialController",
 ];
 
 include_once "Views/header.php";
@@ -20,6 +20,11 @@ include_once "Views/header.php";
         $createCategory = new \Controllers\CreateCategoryController();
         $createCategory->CreateCategory($_POST['CreateCategory']);
     }
+if (!empty($_GET['viewMaterialId'])){
+    $getMaterial= new \Controllers\ViewMaterialController();
+    $getMaterial->GetView($_GET['viewMaterialId']);
+
+}
 $router = new \Core\Router($routes);
 
 include_once "Views/footer.php";

@@ -12,19 +12,19 @@ class CategoryModel extends Db
     private $db;
     public function __construct()
     {
-        $this -> db = new \Core\Db();
+        $this -> db = new Db();
 
     }
 
-    public function SelectAll()
+    protected function SelectAll()
     {
         $result = $this->db->DbQuery("SELECT * FROM `categories`");
 
-        $array = \Core\Db::arrayEnumeration($result);
+        $result = Db::arrayEnumeration($result);
 
-        return $array;
+        return $result;
     }
-    public function Insert($name){
+    protected function Insert($name){
         $this->db->DbQuery("INSERT INTO `categories`(`id`,`categoryTitle`) VALUES (NULL,'$name')");
     }
 }

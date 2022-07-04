@@ -11,7 +11,7 @@ namespace Core;
      protected function __construct(){
 
             $this->db =  new \mysqli("localhost","root","","test_project_db");
-            mysqli_dump_debug_info($this->db);
+
             if ($this->db ->connect_error) {
 
                 die("Нет соеденения с базой данных ");

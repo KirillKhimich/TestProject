@@ -10,7 +10,6 @@ class Router
             $uri = htmlspecialchars(trim($_SERVER['REQUEST_URI'],'/'));
             foreach ($routes as $key => $value){
                 if ($key == $uri) {
-
                     $value = new $value;
                     $value->ActionView();
                     return true;

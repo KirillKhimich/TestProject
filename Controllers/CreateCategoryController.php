@@ -2,14 +2,14 @@
 
 
 namespace Controllers;
+use \Models\CategoryModel;
 
-
-class CreateCategoryController extends \Models\CategoryModel implements RulesForControllers
+class CreateCategoryController extends CategoryModel implements RulesForControllers
 {
     public function CreateCategory($name)
     {
         $name = htmlspecialchars($name);
-        $result = new \Models\CategoryModel();
+        $result = new CategoryModel();
         $result->Insert($name);
     }
     function ActionView()

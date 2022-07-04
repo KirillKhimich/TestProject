@@ -4,24 +4,24 @@
 namespace Models;
 
 
+use Core\Db;
 
-
-class TagModel extends \Core\Db
+class TagModel extends Db
 {
     private $db;
     public function __construct()
     {
-        $this -> db = new \Core\Db();
+        $this -> db = new Db();
 
     }
-    public function SelectAll(){
+    protected function SelectAll(){
         $result =  $this->db->DbQuery("SELECT * FROM `tags`");
 
-        $array = \Core\Db::arrayEnumeration($result);
+        $result = Db::arrayEnumeration($result);
 
-        return $array;
+        return $result;
     }
-    public function Insert($name){
+    protected function Insert($name){
         $this->db->DbQuery("INSERT INTO `tags`(`id`,`tagsTitle`) VALUES (NULL,'$name')");
     }
 }

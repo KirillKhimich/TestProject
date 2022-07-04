@@ -5,15 +5,15 @@ namespace Controllers;
 
 
 
+use \Models\TagModel;
 
-
-class CreateTagController extends \Models\TagModel implements RulesForControllers
+class CreateTagController extends TagModel implements RulesForControllers
 {
 
     public function CreateTag($name)
     {
         $name = htmlspecialchars($name);
-        $result = new \Models\TagModel();
+        $result = new TagModel();
         $result->Insert($name);
     }
      public function ActionView()

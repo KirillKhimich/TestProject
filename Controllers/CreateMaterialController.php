@@ -4,7 +4,9 @@
 namespace Controllers;
 
 
-class CreateMaterialController implements RulesForControllers
+use Models\MaterialModel;
+
+class CreateMaterialController extends MaterialModel implements RulesForControllers
 {
 
     function ActionView()
