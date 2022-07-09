@@ -2,16 +2,13 @@
             <h1 class="my-md-5 my-4">Добавить материал</h1>
             <div class="row">
                 <div class="col-lg-5 col-md-8">
-                    <form>
+                    <form name="createMaterialForm" id="createMaterialForm">
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectType">
-                                <option selected>Выберите тип</option>
-                                <option value="0">Книга</option>
-                                <option value="1">Статья</option>
-                                <option value="2">Видео</option>
-                                <option value="3">Сайт/Блог</option>
-                                <option value="3">Подборка</option>
-                                <option value="3">Ключевые идеи книги</option>
+                            <select class="form-select" id="selectTagId">
+                                <option value="0" selected>Выберите тип</option>
+                                <?php foreach ($viewAllTags as $key => $value):?>
+                                    <option value="tagId/<?=$value['id']?>"><?=$value['tagsTitle']?></option>
+                                <?php endforeach;?>
                             </select>
                             <label for="floatingSelectType">Тип</label>
                             <div class="invalid-feedback">
@@ -19,21 +16,11 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectCategory">
-                                <option selected>Выберите категорию</option>
-                                <option value="0">Деловые/Бизнес-процессы</option>
-                                <option value="1">Деловые/Найм</option>
-                                <option value="2">Деловые/Реклама</option>
-                                <option value="3">Деловые/Управление бизнесом</option>
-                                <option value="4">Деловые/Управление людьми</option>
-                                <option value="5">Деловые/Управление проектами</option>
-                                <option value="6">Детские/Воспитание</option>
-                                <option value="7">Дизайн/Общее</option>
-                                <option value="8">Дизайн/Logo</option>
-                                <option value="9">Дизайн/Web дизайн</option>
-                                <option value="10">Разработка/PHP</option>
-                                <option value="11">Разработка/HTML и CSS</option>
-                                <option value="12">Разработка/Проектирование</option>
+                            <select class="form-select" id="selectCategoryId">
+                                <option value="0" selected>Выберите категорию</option>
+                                <?php foreach ($viewAllCategories as $key => $value):?>
+                                    <option value="categoryId/<?=$value['id']?>"><?=$value['categoryTitle']?></option>
+                                <?php endforeach;?>
                             </select>
                             <label for="floatingSelectCategory">Категория</label>
                             <div class="invalid-feedback">
@@ -41,7 +28,7 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Напишите название" id="floatingName">
+                            <input type="text" class="form-control" placeholder="Напишите название" id="inputMaterialInput">
                             <label for="floatingName">Название</label>
                             <div class="invalid-feedback">
                                 Пожалуйста, заполните поле
@@ -64,5 +51,6 @@
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить</button>
                     </form>
+                </div>
                 </div>
 

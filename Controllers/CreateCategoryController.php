@@ -2,18 +2,30 @@
 
 
 namespace Controllers;
-use \Models\CategoryModel;
+use \Models\CreateCategoryModel;
 
-class CreateCategoryController extends CategoryModel implements RulesForControllers
+class CreateCategoryController extends CreateCategoryModel implements RulesForControllers
 {
-    public function CreateCategory($name)
-    {
-        $name = htmlspecialchars($name);
-        $result = new CategoryModel();
-        $result->Insert($name);
-    }
+
     function ActionView()
     {
         include __DIR__ . "/../Views/create-category.php";
+    }
+    public function CreateCategory($name)
+    {
+        if (!empty($name) && $name != false){
+            $name = htmlspecialchars($name);
+            $result = new CreateCategoryModel();
+            print_r($name);
+            try {
+                $result->Insert($name);
+            }catch (\Exception $e){
+                echo "<h4>" .  $e->getMessage() ."</h4>";
+            }
+
+
+        }else{
+            return false;
+        }
     }
 }

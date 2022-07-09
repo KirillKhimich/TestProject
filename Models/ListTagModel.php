@@ -5,8 +5,9 @@ namespace Models;
 
 
 use Core\Db;
+use mysql_xdevapi\Exception;
 
-class TagModel extends Db
+class ListTagModel extends Db
 {
     private $db;
     public function __construct()
@@ -15,13 +16,15 @@ class TagModel extends Db
 
     }
     protected function SelectAll(){
-        $result =  $this->db->DbQuery("SELECT * FROM `tags`");
+        $result =  $this->db->DbQuery("SELECT * FROM `tags` ORDER BY tags.tagsTitle");
 
         $result = Db::arrayEnumeration($result);
 
         return $result;
     }
-    protected function Insert($name){
-        $this->db->DbQuery("INSERT INTO `tags`(`id`,`tagsTitle`) VALUES (NULL,'$name')");
+
+    protected function Delete($id){
+        $result = $this->db->DbQuery("DELETE FROM `tags` WHERE id = '$id'");
+
     }
 }

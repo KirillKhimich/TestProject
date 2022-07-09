@@ -4,16 +4,15 @@
 namespace Controllers;
 
 
-use Models\MaterialModel;
+use Models\ViewMaterialModel;
 
-class ViewMaterialController extends MaterialModel implements RulesForControllers
+class ViewMaterialController extends ViewMaterialModel implements RulesForControllers
 {
     private static $viewMaterialId;
-
     public function ActionView()
     {
         $viewAllTags = $this->GetAllTags();
-        $viewAllLinks = $this->ViewAllLinks(self::$viewMaterialId);
+        $viewAllLinks = $this->GetAllLinks(self::$viewMaterialId);
         $viewMaterialTags = $this->GetMaterialTags(self::$viewMaterialId);
         $viewMaterial = $this->GetView(self::$viewMaterialId);
         include __DIR__ . "/../Views/view-material.php";
@@ -22,7 +21,7 @@ class ViewMaterialController extends MaterialModel implements RulesForController
     public function GetView($id)
     {
          self::$viewMaterialId = $id;
-         $result = new MaterialModel();
+         $result = new ViewMaterialModel();
          $result = $result->ViewMaterial($id);
          return $result;
 
@@ -30,20 +29,30 @@ class ViewMaterialController extends MaterialModel implements RulesForController
     public function GetMaterialTags($id)
     {
         self::$viewMaterialId = $id;
-        $result = new MaterialModel();
+        $result = new ViewMaterialModel();
         $result = $result->ViewMaterialTags($id);
         return $result;
 
     }
     public function GetAllTags(){
-        $result = new MaterialModel();
+        $result = new ViewMaterialModel();
         $result = $result->ViewAllTags();
         return $result;
     }
     public function GetAllLinks($id){
         self::$viewMaterialId = $id;
-        $result = new MaterialModel();
-        $result = $result->ViewMaterialTags($id);
+        $result = new ViewMaterialModel();
+        $result = $result->ViewAllLinks($id);
         return $result;
+    }
+    public function DeleteLinksMaterial($id){
+        $id = htmlspecialchars($id);
+        $result = new ViewMaterialModel();
+        $result->DeleteMaterialLinks($id);
+    }
+    public function DeleteTagsMaterial($id){
+        $id = htmlspecialchars($id);
+        $result = new ViewMaterialModel();
+        $result->DeleteMaterialTags($id);
     }
 }

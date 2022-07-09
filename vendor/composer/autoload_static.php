@@ -35,14 +35,24 @@ class ComposerStaticInitdb8a3bc4518e9eb78c292c9ffaf4a07c
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Controllers\\CategoryController' => __DIR__ . '/../..' . '/Controllers/CategoryController.php',
         'Controllers\\Controller404' => __DIR__ . '/../..' . '/Controllers/Controller404.php',
-        'Controllers\\MaterialController' => __DIR__ . '/../..' . '/Controllers/MaterialController.php',
+        'Controllers\\CreateCategoryController' => __DIR__ . '/../..' . '/Controllers/CreateCategoryController.php',
+        'Controllers\\CreateMaterialController' => __DIR__ . '/../..' . '/Controllers/CreateMaterialController.php',
+        'Controllers\\CreateTagController' => __DIR__ . '/../..' . '/Controllers/CreateTagController.php',
+        'Controllers\\ListCategoryController' => __DIR__ . '/../..' . '/Controllers/ListCategoryController.php',
+        'Controllers\\ListMaterialController' => __DIR__ . '/../..' . '/Controllers/ListMaterialController.php',
+        'Controllers\\ListTagController' => __DIR__ . '/../..' . '/Controllers/ListTagController.php',
         'Controllers\\RulesForControllers' => __DIR__ . '/../..' . '/Controllers/RulesForControllers.php',
+        'Controllers\\ViewMaterialController' => __DIR__ . '/../..' . '/Controllers/ViewMaterialController.php',
         'Core\\Db' => __DIR__ . '/../..' . '/Core/Db.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
-        'Models\\CategoryModel' => __DIR__ . '/../..' . '/Models/CategoryModel.php',
-        'Models\\MaterialModel' => __DIR__ . '/../..' . '/Models/MaterialModel.php',
+        'Models\\CreateCategoryModel' => __DIR__ . '/../..' . '/Models/CreateCategoryModel.php',
+        'Models\\CreateMaterialModel' => __DIR__ . '/../..' . '/Models/CreateMaterialModel.php',
+        'Models\\CreateTagModel' => __DIR__ . '/../..' . '/Models/CreateTagModel.php',
+        'Models\\ListCategoryModel' => __DIR__ . '/../..' . '/Models/ListCategoryModel.php',
+        'Models\\ListMaterialModel' => __DIR__ . '/../..' . '/Models/ListMaterialModel.php',
+        'Models\\ListTagModel' => __DIR__ . '/../..' . '/Models/ListTagModel.php',
+        'Models\\ViewMaterialModel' => __DIR__ . '/../..' . '/Models/ViewMaterialModel.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
