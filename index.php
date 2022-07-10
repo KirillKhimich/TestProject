@@ -13,7 +13,6 @@ $routes = [
     "list-tag" => "Controllers\ListTagController",
     "view-material?viewMaterialId=$viewMaterialId" => "Controllers\ViewMaterialController",
 ];
-
 //Удаление элементов
 if (!empty($_POST['deleteId'])){
     $deleteType = explode("/",$_POST['deleteId']);
@@ -34,23 +33,52 @@ if (!empty($_POST['deleteId'])){
         $delete->DeleteTagsMaterial($deleteType[1]);
     }
 }
+
 //Вызов метода для отображения нужного материала
 if (!empty($_GET['viewMaterialId'])){
     $getMaterial= new \Controllers\ViewMaterialController();
     $getMaterial->GetView($_GET['viewMaterialId']);
 }
+//Вызов методов для добавления тегов,категорий,материалов:
 
-//Вызов методов для добавления тегов и категорий
+//Теги
     if (!empty($_POST['createTag'])){
         $createTag = new \Controllers\CreateTagController();
         $createTag->CreateTag($_POST['createTag']);
 }
+//Категории
     if (!empty($_POST['createCategory'])){
         $createCategory = new \Controllers\CreateCategoryController();
         $createCategory->CreateCategory($_POST['createCategory']);
 }
+//Материалы
+    if (!empty($_POST['selectTypeId']) && !empty($_POST['selectCategoryId']) && !empty($_POST['inputMaterialName'])){
+        $selectTypeId = explode('/',$_POST['selectTypeId']);
+        $selectCategoryId = explode('/',$_POST['selectCategoryId']);
+        $inputMaterialName = $_POST['inputMaterialName'];
+        if (!empty($_POST['inputMaterialAuthor'])){
+            $inputMaterialAuthor = $_POST['inputMaterialAuthor'];
+        }else $inputMaterialAuthor = "";
+        if (!empty($_POST['textareaMaterialDescription'])){
+            $textareaMaterialDescription = $_POST['textareaMaterialDescription'];
+        }else $textareaMaterialDescription = "";
+        $createMaterial = new \Controllers\CreateMaterialController();
+        $createMaterial->CreateMaterial($selectTypeId[1],$selectCategoryId[1],$inputMaterialName,$inputMaterialAuthor,$textareaMaterialDescription);
+    }
+//Теги в материалы
+    if (!empty($_POST['selectAddTag'])){
+        $selectAddTag = $_POST['selectAddTag'];
+        $addTag = new \Controllers\ViewMaterialController();
+        $addTag->addMaterialTag($selectAddTag[1],$selectAddTag[0]);
+    }
+    if (!empty($_POST['addLinksLink'])){
+        $addLinksLink = $_POST['addLinksLink'];
+        $addLinksTitle = $_POST['addLinksTitle'];
+        $checkGETId = $_POST['checkGETId'];
+        $addLink = new \Controllers\ViewMaterialController();
+        $addLink->link($checkGETId,$addLinksTitle,$addLinksLink);
 
-
+    }
 //Виды
 include_once "Views/header.php";
 $router = new \Core\Router($routes);

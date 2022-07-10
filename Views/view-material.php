@@ -1,23 +1,22 @@
-        <?php foreach ($viewMaterial as $key => $item) :?>
-
-            <h1 class="my-md-5 my-4"><?=$item['title']?></h1>
+        <?php foreach ($viewMaterial as $key => $value) :?>
+            <h1 class="my-md-5 my-4"><?=$value['title']?></h1>
             <div class="row mb-3">
                 <div class="col-lg-6 col-md-8">
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Авторы</p>
-                        <p class="col"><?=$item['author']?></p>
+                        <p class="col"><?php if (!empty($value['author'])){?><?=$value['author']?><?php }else{?>Автор неизвестен<?php }?></p>
                     </div>
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Тип</p>
-                        <p class="col"><?=$item['typeTitle']?></p>
+                        <p class="col"><?=$value['typeTitle']?></p>
                     </div>
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Категория</p>
-                        <p class="col"><?=$item['categoryTitle']?></p>
+                        <p class="col"><?=$value['categoryTitle']?></p>
                     </div>
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Описание</p>
-                        <p class="col"><?php if (!empty($item['description']))echo $item['description'];else echo "Нет описания"?></p>
+                        <p class="col"><?php if (!empty($value['description']))echo $value['description'];else echo "Нет описания"?></p>
                     </div>
                 </div>
             </div>
@@ -27,11 +26,12 @@
                         <h3>Теги</h3>
                         <div class="input-group mb-3">
                             <select class="form-select" id="selectAddTag" aria-label="Добавьте автора">
-                                <?php foreach ($viewAllTags as $key => $value) :?>
-                                            <option selected><?=$value['tagsTitle']?></option>
+                                    <option value=<?=$_GET['viewMaterialId'] . "/" ?>0" selected>Выберите тег</option>
+                                    <?php foreach ($viewAllTags as $key => $value) :?>
+                                            <option value="<?php echo $_GET['viewMaterialId'] . "/".$value['id']?>" ><?=$value['tagsTitle']?></option>
                                     <?php endforeach;?>
                             </select>
-                            <button class="btn btn-primary" type="button">Добавить</button>
+                            <button class="btn btn-primary" id="addTagButton" type="button">Добавить</button>
                         </div>
                     </form>
                     <ul class="list-group mb-4">
@@ -97,32 +97,31 @@
      tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Добавить ссылку</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" placeholder="Добавьте подпись"
-                           id="floatingModalSignature">
-                    <label for="floatingModalSignature">Подпись</label>
-                    <div class="invalid-feedback">
-                        Пожалуйста, заполните поле
-                    </div>
-
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Добавить ссылку</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" placeholder="Добавьте ссылку" id="floatingModalLink">
-                    <label for="floatingModalLink">Ссылка</label>
-                    <div class="invalid-feedback">
-                        Пожалуйста, заполните поле
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="addLinksTitle" placeholder="Добавьте подпись"
+                               id="addLinksTitle">
+                        <label for="floatingModalSignature">Подпись</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Добавьте ссылку" name="addLinksLink" id="addLinksLink">
+                        <label for="floatingModalLink">Ссылка</label>
+                        <div class="invalid-feedback" id="invalidFeedbackField">
+                            Пожалуйста, заполните поле
+                        </div>
+                        <div class="invalid-feedback" id="invalidFeedbackLink">
+                            Поле не является ссылкой
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Добавить</button>
-                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Закрыть</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" name="materialId" id="materialId" value="" class="btn btn-primary">Добавить</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
         </div>
     </div>
 </div>

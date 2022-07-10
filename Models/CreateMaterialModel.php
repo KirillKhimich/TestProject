@@ -12,8 +12,8 @@ class CreateMaterialModel extends Db
         $this -> db = new Db();
 
     }
-    protected function ViewAllTags(){
-        $result =  $this->db->DbQuery("SELECT * FROM `tags`");
+    protected function ViewAllTypes(){
+        $result =  $this->db->DbQuery("SELECT * FROM `types`");
         $result = Db::arrayEnumeration($result);
         if (!$result){
             throw new \Exception("Произошла ошибка при выборке Тегов");
@@ -26,5 +26,11 @@ class CreateMaterialModel extends Db
         if (!$result){
             throw new \Exception("Произошла ошибка при выборке Категорий");
         }else return $result;
+    }
+    protected function Insert($Type,$Category,$Name,$Author = "",$Description =""){
+        $result = $this->db->DbQuery("INSERT INTO `materials`(id, title, author, description, typeId, categoryId) VALUES (NULL,'$Name','$Author','$Description','$Type','$Category')");
+        if (!$result){
+            throw new \Exception("Произошла ошибка при добавлении материала");
+        }
     }
 }

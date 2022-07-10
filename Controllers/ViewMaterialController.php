@@ -8,29 +8,27 @@ use Models\ViewMaterialModel;
 
 class ViewMaterialController extends ViewMaterialModel implements RulesForControllers
 {
-    private static $viewMaterialId;
+    private $viewMaterialId;
     public function ActionView()
     {
+        $this->viewMaterialId = $_GET['viewMaterialId'];
         $viewAllTags = $this->GetAllTags();
-        $viewAllLinks = $this->GetAllLinks(self::$viewMaterialId);
-        $viewMaterialTags = $this->GetMaterialTags(self::$viewMaterialId);
-        $viewMaterial = $this->GetView(self::$viewMaterialId);
+        $viewAllLinks = $this->GetAllLinks();
+        $viewMaterialTags = $this->GetMaterialTags();
+        $viewMaterial = $this->GetView();
         include __DIR__ . "/../Views/view-material.php";
     }
-
-    public function GetView($id)
+    public function GetView()
     {
-         self::$viewMaterialId = $id;
          $result = new ViewMaterialModel();
-         $result = $result->ViewMaterial($id);
+         $result = $result->ViewMaterial($this->viewMaterialId);
          return $result;
 
     }
-    public function GetMaterialTags($id)
+    public function GetMaterialTags()
     {
-        self::$viewMaterialId = $id;
         $result = new ViewMaterialModel();
-        $result = $result->ViewMaterialTags($id);
+        $result = $result->ViewMaterialTags($this->viewMaterialId);
         return $result;
 
     }
@@ -39,10 +37,9 @@ class ViewMaterialController extends ViewMaterialModel implements RulesForContro
         $result = $result->ViewAllTags();
         return $result;
     }
-    public function GetAllLinks($id){
-        self::$viewMaterialId = $id;
+    public function GetAllLinks(){
         $result = new ViewMaterialModel();
-        $result = $result->ViewAllLinks($id);
+        $result = $result->ViewAllLinks($this->viewMaterialId);
         return $result;
     }
     public function DeleteLinksMaterial($id){
@@ -55,4 +52,31 @@ class ViewMaterialController extends ViewMaterialModel implements RulesForContro
         $result = new ViewMaterialModel();
         $result->DeleteMaterialTags($id);
     }
+    public function addMaterialTag($tagId,$materialId){
+        $tagId = htmlspecialchars($tagId);
+        $materialId = htmlspecialchars($materialId);
+        $result = new ViewMaterialModel();
+        try {
+            $result->InsertMaterialTag($tagId,$materialId);
+        }catch (\Exception $e){
+            echo $e->getMessage();
+        }
+
+    }
+    public function link($materialId,$linkTitle,$linkLink){
+        $materialId = htmlspecialchars($materialId);
+        $linkTitle = htmlspecialchars($linkTitle);
+        $linkLink = htmlspecialchars($linkLink);
+        $result = new ViewMaterialModel();
+        try {
+            if (!empty($linkTitle)){
+                $result->InsertMaterialLink($materialId,$linkTitle,$linkLink);
+            }else{
+                $result->InsertMaterialLink($materialId,$linkLink,$linkLink);
+            }
+        }catch (\Exception $e){
+            echo $e->getMessage();
+        }
+
+}
 }

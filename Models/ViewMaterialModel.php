@@ -37,6 +37,14 @@ class ViewMaterialModel extends Db
         $this->db->DbQuery("DELETE FROM links WHERE id = '$id'");
     }
     protected function DeleteMaterialTags($id){
-        $this->db->DbQuery("DELETE FROM `cloudtags` WHERE tagId = '$id'");
+        $this->db->DbQuery("DELETE FROM cloudtags WHERE tagId = '$id'");
+    }
+    protected function InsertMaterialTag($tagId,$materialId){
+        $result = $this->db->DbQuery("INSERT INTO cloudtags(materialId, tagId) VALUES ('$materialId','$tagId')");
+        if (!$result) throw new \Exception("Произошла ошибка при добавлении тега");
+    }
+    protected function InsertMaterialLink($materialId,$linkTitle,$linkLink){
+        $result = $this->db->DbQuery("INSERT INTO links(id, materialId, title, link) VALUES (NULL,'$materialId','$linkTitle','$linkLink')");
+        if (!$result) throw new \Exception("Произошла ошибка при добавлении ссылки");
     }
 }

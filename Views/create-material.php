@@ -4,50 +4,43 @@
                 <div class="col-lg-5 col-md-8">
                     <form name="createMaterialForm" id="createMaterialForm">
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="selectTagId">
-                                <option value="0" selected>Выберите тип</option>
+                            <select class="form-select" name="selectTypeId" id="selectTypeId">
+                                <option value="typeId/0" selected>Выберите тип</option>
                                 <?php foreach ($viewAllTags as $key => $value):?>
-                                    <option value="tagId/<?=$value['id']?>"><?=$value['tagsTitle']?></option>
+                                    <option value="tagId/<?=$value['id']?>"><?=$value['typeTitle']?></option>
                                 <?php endforeach;?>
                             </select>
                             <label for="floatingSelectType">Тип</label>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-tag">
                                 Пожалуйста, выберите значение
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="selectCategoryId">
-                                <option value="0" selected>Выберите категорию</option>
+                            <select class="form-select" name="selectCategoryId" id="selectCategoryId">
+                                <option value="categoryId/0" selected>Выберите категорию</option>
                                 <?php foreach ($viewAllCategories as $key => $value):?>
                                     <option value="categoryId/<?=$value['id']?>"><?=$value['categoryTitle']?></option>
                                 <?php endforeach;?>
                             </select>
                             <label for="floatingSelectCategory">Категория</label>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-category">
                                 Пожалуйста, выберите значение
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Напишите название" id="inputMaterialInput">
+                            <input type="text" class="form-control" placeholder="Напишите название" name="inputMaterialName" id="inputMaterialName">
                             <label for="floatingName">Название</label>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="invalid-feedback-name">
                                 Пожалуйста, заполните поле
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Напишите авторов" id="floatingAuthor">
+                            <input type="text" class="form-control" placeholder="Напишите авторов" name="inputMaterialAuthor" id="inputMaterialAuthor">
                             <label for="floatingAuthor">Авторы</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, заполните поле
-                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Напишите краткое описание" id="floatingDescription"
+                    <textarea class="form-control" placeholder="Напишите краткое описание" name="textareaMaterialDescription" id="textareaMaterialDescription"
                               style="height: 100px"></textarea>
-                            <label for="floatingDescription">Описание</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, заполните поле
-                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Добавить</button>
                     </form>
