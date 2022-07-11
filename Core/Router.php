@@ -15,7 +15,6 @@ class Router
                         $value->ActionView();
                         return true;
                 }
-
             }
             include __DIR__ . "/../Views/404.php";
             return false;

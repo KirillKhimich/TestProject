@@ -9,19 +9,25 @@
 </footer>
 
 <!--Окошко подтверждения-->
-<div id="confirmDeleteBlock" class="col-md-2 offset-md-5">
-    <h5 class="mb-3">Вы точно хотите удалить?</h5>
-    <button id="confirmDeleteButton" type="submit" class="btn btn-primary col-md-4 offset-md-8 ">Да,хочу!</button>
-    <a href="" id="closeBlock">
-        <span class="close" id="close1"></span>
-        <span class="close" id="close2"></span>
-    </a>
-</div>
-<div id="darkWindow"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
+<div class="modal fade" id="deleteModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+     tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalToggleLabel">Вы точно хотите удалить?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="materialId" id="confirmDeleteButton" value="" class="btn btn-primary">Да,хочу!</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../sourses/js/bootstrap.min.js"></script>
 <script src ="../sourses/js/jquery-3.5.1.js"></script>
 <script src ="../sourses/js/scripts.js"></script>
 </body>

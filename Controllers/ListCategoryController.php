@@ -11,12 +11,21 @@ class ListCategoryController extends ListCategoryModel implements rulesForContro
 
     public function ActionView(){
         $category = new ListCategoryModel();
-        $category = $category ->SelectAll();
+        try {
+            $category = $category ->SelectAll();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         include_once __DIR__ . "/../Views/list-category.php";
     }
     public function deleteCategory($id){
         $id = htmlspecialchars($id);
         $result = new ListCategoryModel();
-        $result->Delete($id);
+        try {
+            $result->Delete($id);
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
     }
+
 }

@@ -43,6 +43,7 @@ class ComposerStaticInitdb8a3bc4518e9eb78c292c9ffaf4a07c
         'Controllers\\ListMaterialController' => __DIR__ . '/../..' . '/Controllers/ListMaterialController.php',
         'Controllers\\ListTagController' => __DIR__ . '/../..' . '/Controllers/ListTagController.php',
         'Controllers\\RulesForControllers' => __DIR__ . '/../..' . '/Controllers/RulesForControllers.php',
+        'Controllers\\TagMaterialController' => __DIR__ . '/../..' . '/Controllers/TagMaterialController.php',
         'Controllers\\ViewMaterialController' => __DIR__ . '/../..' . '/Controllers/ViewMaterialController.php',
         'Core\\Db' => __DIR__ . '/../..' . '/Core/Db.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
@@ -52,6 +53,7 @@ class ComposerStaticInitdb8a3bc4518e9eb78c292c9ffaf4a07c
         'Models\\ListCategoryModel' => __DIR__ . '/../..' . '/Models/ListCategoryModel.php',
         'Models\\ListMaterialModel' => __DIR__ . '/../..' . '/Models/ListMaterialModel.php',
         'Models\\ListTagModel' => __DIR__ . '/../..' . '/Models/ListTagModel.php',
+        'Models\\TagMaterialModel' => __DIR__ . '/../..' . '/Models/TagMaterialModel.php',
         'Models\\ViewMaterialModel' => __DIR__ . '/../..' . '/Models/ViewMaterialModel.php',
     );
 

@@ -15,6 +15,7 @@ return array(
     'Controllers\\ListMaterialController' => $baseDir . '/Controllers/ListMaterialController.php',
     'Controllers\\ListTagController' => $baseDir . '/Controllers/ListTagController.php',
     'Controllers\\RulesForControllers' => $baseDir . '/Controllers/RulesForControllers.php',
+    'Controllers\\TagMaterialController' => $baseDir . '/Controllers/TagMaterialController.php',
     'Controllers\\ViewMaterialController' => $baseDir . '/Controllers/ViewMaterialController.php',
     'Core\\Db' => $baseDir . '/Core/Db.php',
     'Core\\Router' => $baseDir . '/Core/Router.php',
@@ -24,5 +25,6 @@ return array(
     'Models\\ListCategoryModel' => $baseDir . '/Models/ListCategoryModel.php',
     'Models\\ListMaterialModel' => $baseDir . '/Models/ListMaterialModel.php',
     'Models\\ListTagModel' => $baseDir . '/Models/ListTagModel.php',
+    'Models\\TagMaterialModel' => $baseDir . '/Models/TagMaterialModel.php',
     'Models\\ViewMaterialModel' => $baseDir . '/Models/ViewMaterialModel.php',
 );

@@ -4,6 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 //Пути для Роутера
 $viewMaterialId = $_GET['viewMaterialId'];
+$viewTagId = $_GET['viewTagId'];
 $routes = [
     "create-tag"=> "Controllers\CreateTagController",
     "create-category" => "Controllers\CreateCategoryController",
@@ -12,6 +13,7 @@ $routes = [
     "list-materials" => "Controllers\ListMaterialController",
     "list-tag" => "Controllers\ListTagController",
     "view-material?viewMaterialId=$viewMaterialId" => "Controllers\ViewMaterialController",
+    "tag-material?viewTagId=$viewTagId" =>"Controllers\TagMaterialController",
 ];
 //Функция для проверки строки на URL
 function is_url($url) {
@@ -37,12 +39,6 @@ if (!empty($_POST['deleteId'])){
         $delete->DeleteTagsMaterial($deleteType[1]);
     }
 }
-
-//Вызов метода для отображения нужного материала
-if (!empty($_GET['viewMaterialId'])){
-    $getMaterial= new \Controllers\ViewMaterialController();
-    $getMaterial->GetView($_GET['viewMaterialId']);
-}
 //Вызов методов для добавления тегов,категорий,материалов:
 
 //Теги
@@ -58,8 +54,8 @@ if (!empty($_GET['viewMaterialId'])){
 }
 //Материалы
     if (!empty($_POST['selectTypeId']) && !empty($_POST['selectCategoryId']) && !empty($_POST['inputMaterialName'])){
-        $selectTypeId = explode('/',$_POST['selectTypeId']);
-        $selectCategoryId = explode('/',$_POST['selectCategoryId']);
+        $selectTypeId = $_POST['selectTypeId'];
+        $selectCategoryId = $_POST['selectCategoryId'];
         $inputMaterialName = $_POST['inputMaterialName'];
         if (!empty($_POST['inputMaterialAuthor'])){
             $inputMaterialAuthor = $_POST['inputMaterialAuthor'];
@@ -68,25 +64,72 @@ if (!empty($_GET['viewMaterialId'])){
             $textareaMaterialDescription = $_POST['textareaMaterialDescription'];
         }else $textareaMaterialDescription = "";
         $createMaterial = new \Controllers\CreateMaterialController();
-        $createMaterial->CreateMaterial($selectTypeId[1],$selectCategoryId[1],$inputMaterialName,$inputMaterialAuthor,$textareaMaterialDescription);
+        $createMaterial->CreateMaterial($selectTypeId,$selectCategoryId,$inputMaterialName,$inputMaterialAuthor,$textareaMaterialDescription);
     }
-//Теги в материалы
+//Теги в материал
     if (!empty($_POST['selectAddTag'])){
         $selectAddTag = $_POST['selectAddTag'];
+        $checkGETId = $_POST['checkGETId'];
         $addTag = new \Controllers\ViewMaterialController();
-        $addTag->addMaterialTag($selectAddTag[1],$selectAddTag[0]);
+        $addTag->addMaterialTag($selectAddTag,$checkGETId);
     }
+//Ссылки в материал
     if (!empty($_POST['addLinksLink'])){
         $addLinksLink = $_POST['addLinksLink'];
         $addLinksTitle = $_POST['addLinksTitle'];
         $checkGETId = $_POST['checkGETId'];
         if (is_url($addLinksLink) !== NULL){
             $addLink = new \Controllers\ViewMaterialController();
-            $addLink->link($checkGETId,$addLinksTitle,$addLinksLink);
+            $addLink->addMaterialLink($checkGETId,$addLinksTitle,$addLinksLink);
         }
     }
+//Вызов методов для обновления тегов,категорий,материалов:
+
+//Категории
+    if (!empty($_POST['selectUpdateCategory']) && !empty($_POST['inputUpdateCategory'])){
+        $selectUpdateCategory = $_POST['selectUpdateCategory'];
+        $inputUpdateCategory = $_POST['inputUpdateCategory'];
+        $alterCategory = new \Controllers\CreateCategoryController();
+        $alterCategory->UpdateCategory($selectUpdateCategory,$inputUpdateCategory);
+    }
+//Теги
+    if (!empty($_POST['selectUpdateTag']) && !empty($_POST['inputUpdateTag'])){
+        $selectUpdateTag = $_POST['selectUpdateTag'];
+        $inputUpdateTag = $_POST['inputUpdateTag'];
+        $alterCategory = new \Controllers\CreateTagController();
+        $alterCategory->UpdateTag($selectUpdateTag,$inputUpdateTag);
+    }
+//Материалы
+if (!empty($_POST['updateMaterialId']) && !empty($_POST['updateTypeId']) && !empty($_POST['updateCategoryId']) && !empty($_POST['inputUpdateMaterialName'])){
+    $updateMaterialId = $_POST['updateMaterialId'];
+    $updateTypeId = $_POST['updateTypeId'];
+    $updateCategoryId = $_POST['updateCategoryId'];
+    $inputUpdateMaterialName = $_POST['inputUpdateMaterialName'];
+    if (!empty($_POST['inputUpdateMaterialAuthor'])){
+        $inputMaterialAuthor = $_POST['inputUpdateMaterialAuthor'];
+    }else $inputMaterialAuthor = "";
+    if (!empty($_POST['textareaUpdateMaterialDescription'])){
+        $textareaMaterialDescription = $_POST['textareaUpdateMaterialDescription'];
+    }else $textareaMaterialDescription = "";
+    $createMaterial = new \Controllers\CreateMaterialController();
+    $createMaterial->UpdateMaterial($updateMaterialId,$updateTypeId,$updateCategoryId,$inputUpdateMaterialName,$inputMaterialAuthor,$textareaMaterialDescription);
+}
+if (!empty($_POST['updateLinksLink'])){
+    $updateLinksTitle = $_POST['updateLinksTitle'];
+    $updateLinksLink = $_POST['updateLinksLink'];
+    $linkId = $_POST['linkId'];
+    if (is_url($updateLinksLink) !== NULL){
+        $updateLink = new \Controllers\ViewMaterialController();
+        $updateLink->UpdateMaterialLink($updateLinksTitle,$updateLinksLink,$linkId);
+    }
+}
+
 //Виды
 include_once "Views/header.php";
-$router = new \Core\Router($routes);
+try {
+    $router = new \Core\Router($routes);
+}catch (\Exception $e){
+    die($e ->getMessage());
+}
 include_once "Views/footer.php";
 

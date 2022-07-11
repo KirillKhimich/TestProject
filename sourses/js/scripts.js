@@ -1,17 +1,28 @@
+//Функция поиска
 $('#finderInput').on("change input ",function () {
     let txtlen = $(this).val().length;
     const inputValue = $(this).val();
-
-    $('.table .searchTd').each(function(){
-        let i = 0;
-        ($(this).html());
-    });
+    $('.searchTr').hide();
     if (txtlen > 0){
+    $('.searchTr').each(function(){
+        let array = [$(this).html()];
+        $.each(array, function(key, value) {
+            if (value.indexOf(inputValue) != -1){
+                $('.searchTr').html(value).show();
+                console.log(value)
 
+            }else {
+
+            }
+        });
+    });
+    }else{
+        $('.table .searchTr').show();
     }
 });
+//Функция для проверки GET запроса
 $.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null) {
         return null;
     }
@@ -19,8 +30,6 @@ $.urlParam = function(name){
 }
 //Кнопка подтверждения удаления
 $('.delete').click(function (){
-    $('#darkWindow').show('slow');
-    $('#confirmDeleteBlock').show('slow');
     let deleteId = $(this).attr('data-id');
     $('#confirmDeleteButton').click(function (){
         $.post({
@@ -34,19 +43,6 @@ $('.delete').click(function (){
     })
     return false;
 });
-
-$('#darkWindow').click(function () {
-    $('#darkWindow').hide('slow');
-    $('#confirmDeleteBlock').hide('slow');
-
-});
-
-$('#closeBlock').click(function () {
-    $('#darkWindow').hide('slow');
-    $('#confirmDeleteBlock').hide('slow');
-    return false;
-});
-
 //Скрипт для добавления категории
 $('#createCategoryForm').submit(function () {
     let count = $('#createCategory').val().length;
@@ -81,21 +77,21 @@ $('#createTagForm').submit(function () {
     }
     return false;
 });
-
+//Скрипт для добавления материала
 $('#createMaterialForm').submit(function (){
-        let selectTypeId =  $('#selectTypeId').val().split('/');
-        let selectCategoryId = $('#selectCategoryId').val().split('/');
+        let selectTypeId =  $('#selectTypeId').val();
+        let selectCategoryId = $('#selectCategoryId').val();
         let inputName = $('#inputMaterialName').val().length;
-        if (selectTypeId[1] < 1 ){
-            $('#invalid-feedback-tag').show(500);
+        if (selectTypeId < 1 ){
+            $('#invalidFeedbackType').show(500);
         }
-        if (selectCategoryId[1] < 1 ){
-            $('#invalid-feedback-category').show(500);
+        if (selectCategoryId < 1 ){
+            $('#invalidFeedbackCategory').show(500);
         }
         if (inputName < 1){
-            $('#invalid-feedback-name').show(500)
+            $('#invalidFeedbackName').show(500)
         }
-        if (selectCategoryId[1] > 0 && selectTypeId[1] > 0 && inputName > 0){
+        if (selectCategoryId > 0 && selectTypeId > 0 && inputName > 0){
             $.post({
                 url:"../../index.php",
                 data: $("#createMaterialForm").serialize(),
@@ -107,20 +103,23 @@ $('#createMaterialForm').submit(function (){
         }
     return false;
 });
+//Добавление тега в материал
 $('#addTagButton').click(function (){
-        let selectAddTag = $('#selectAddTag').val().split('/');
-        if (selectAddTag[1] > 0){
+        let selectAddTag = $('#selectAddTag').val();
+        let checkGETId = $.urlParam("viewMaterialId")
+        if (selectAddTag > 0){
             $.post({
                 url:"../../index.php",
-                data:{selectAddTag : selectAddTag},
+                data:{selectAddTag : selectAddTag,checkGETId:checkGETId},
                 datatype:"json",
                 success: function () {
-                    location.reload();
+                    location.reload()
                 }
             })
        }
 });
-$('#materialId').click(function () {
+//Добавление ссылки в материал
+$('#addMaterialLink').click(function () {
     let addLinksLink = $('#addLinksLink').val();
     let addLinksTitle = $('#addLinksTitle').val();
     let checkOnUrl = addLinksLink.match(/(^http:\/\/)|(^www)|(https:\/\/)/) != null;
@@ -144,4 +143,113 @@ $('#materialId').click(function () {
         $('#invalidFeedbackField').show(500);
     }
     return false;
+})
+//Обновление Категории
+$('#formUpdateCategory').submit(function (){
+    let selectUpdateCategory = $('#selectUpdateCategory').val()
+    let inputUpdateCategory = $('#inputUpdateCategory').val().length;
+    if (selectUpdateCategory < 1){
+        $('#updateInvalidSelectCategory').show(500);
+    }
+    if (inputUpdateCategory < 1){
+        $('#updateInvalidInputCategory').show(500);
+    }
+    if (selectUpdateCategory > 0 && inputUpdateCategory > 0) {
+        $.post({
+            url: "../../index.php",
+            data: $(this).serialize(),
+            datatype: "json",
+            success: function () {
+                location.reload()
+            }
+        })
+    }
+   return false;
+});
+//Обновление тега
+$('#formUpdateTag').submit(function (){
+    let selectUpdateTag = $('#selectUpdateTag').val()
+    let inputUpdateTag = $('#inputUpdateTag').val().length;
+    if (selectUpdateTag < 1){
+        $('#updateInvalidSelectTag').show(500);
+    }
+    if (inputUpdateTag < 1){
+        $('#updateInvalidInputTag').show(500);
+    }
+    if (selectUpdateTag > 0 && inputUpdateTag > 0) {
+        $.post({
+            url: "../../index.php",
+            data: $(this).serialize(),
+            datatype: "json",
+            success: function () {
+                location.reload();
+            }
+        })
+    }
+    return false;
+});
+//Обновление материала
+$('#updateMaterialForm').submit(function (){
+    let updateMaterialId =  $('#updateMaterialId').val();
+    let updateTypeId = $('#updateTypeId').val();
+    let updateCategoryId = $('#updateCategoryId').val();
+    let inputUpdateMaterialName = $('#inputUpdateMaterialName').val().length;
+    if (updateMaterialId < 1 ){
+        $('#invalidFeedbackUpdateMaterial').show(500);
+    }
+    if (updateTypeId < 1 ){
+        $('#invalidFeedbackUpdateType').show(500);
+    }
+    if (updateCategoryId < 1 ){
+        $('#invalidFeedbackUpdateCategory').show(500);
+    }
+    if (inputUpdateMaterialName < 1){
+        $('#invalidFeedbackUpdateName').show(500)
+    }
+    if (updateMaterialId > 0 && updateTypeId > 0 && updateCategoryId > 0 && inputUpdateMaterialName > 0){
+        $.post({
+            url:"../../index.php",
+            data: $("#updateMaterialForm").serialize(),
+            datatype:"json",
+            success: function () {
+                location.reload();
+            }
+        })
+    }
+    return false;
+});
+// обновление ссылки в материале
+$('.editLink').click(function (){
+    let linkId = $(this).attr('data-id');
+    let link = document.getElementById(linkId);
+    let linkLink = $(link).attr('href');
+    let linkTitle = $(link).attr('data-id');
+    $('#updateLinksLink').val(linkLink);
+    $('#updateLinksTitle').val(linkTitle);
+    $('#updateMaterialLink').click(function () {
+        let updateLinksLink = $('#updateLinksLink').val();
+        let updateLinksTitle = $('#updateLinksTitle').val();
+        let checkOnUrl = updateLinksLink.match(/(^http:\/\/)|(^www)|(https:\/\/)/) != null;
+        let checkGETId = $.urlParam("viewMaterialId")
+        if (updateLinksLink.length > 0){
+            if (checkOnUrl === true) {
+                $.post({
+                    url: "../../index.php",
+                    data: {updateLinksLink : updateLinksLink,updateLinksTitle: updateLinksTitle,linkId:linkId},
+                    datatype: "json",
+                    success: function () {
+                        location.reload()
+                    }
+                })
+            }
+            else{
+                $('#invalidUpdateFeedbackField').hide(500);
+                $('#invalidUpdateFeedbackLink').show(500);
+            }
+        }else{
+            $('#invalidUpdateFeedbackLink').hide(500);
+            $('#invalidUpdateFeedbackField').show(500);
+        }
+        return false;
+    })
 })

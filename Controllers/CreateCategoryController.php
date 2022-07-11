@@ -9,20 +9,33 @@ class CreateCategoryController extends CreateCategoryModel implements RulesForCo
 
     function ActionView()
     {
+        $allCategories = new CreateCategoryModel();
+        try {
+            $allCategories = $allCategories->SelectAll();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         include __DIR__ . "/../Views/create-category.php";
     }
     public function CreateCategory($name)
     {
-        if (!empty($name) && $name != false){
             $name = htmlspecialchars($name);
             $result = new CreateCategoryModel();
             try {
                 $result->Insert($name);
             }catch (\Exception $e){
-                echo "<h4>" .  $e->getMessage() ."</h4>";
+                die($e->getMessage());
             }
-        }else{
-            return false;
-        }
+    }
+    public function UpdateCategory($id,$name)
+    {
+            $name = htmlspecialchars($name);
+            $result = new CreateCategoryModel();
+            try {
+                $result->Update($id,$name);
+            }catch (\Exception $e){
+                die($e->getMessage());
+            }
+
     }
 }

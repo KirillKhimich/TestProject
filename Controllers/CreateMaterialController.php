@@ -11,29 +11,25 @@ class CreateMaterialController extends CreateMaterialModel implements RulesForCo
 
     function ActionView()
     {
-        $viewAllCategories = $this->GetAllCategories();
-        $viewAllTags = $this->ViewAllTypes();
+        $selectMaterial = new CreateMaterialModel();
+        try {
+            $viewAllMaterials = $selectMaterial->ViewAllMaterials();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
+        try {
+            $viewAllCategories = $selectMaterial->ViewAllCategories();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
+        try {
+            $viewAllTags = $selectMaterial->ViewAllTypes();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         include __DIR__ . "/../Views/create-material.php";
     }
-    public function GetAllTypes(){
-        $result = new CreateMaterialModel();
-        try {
-            $result = $result->ViewAllTypes();
-            return $result;
-        }catch (\Exception $e){
-            echo $e;
-        }
-    }
 
-    public function GetAllCategories(){
-        $result = new CreateMaterialModel();
-        try {
-            $result = $result->ViewAllCategories();
-            return $result;
-        }catch (\Exception $e){
-            echo $e;
-        }
-    }
     public function CreateMaterial($Type,$Category,$Name,$Author = "",$Description =""){
         $Type = htmlspecialchars($Type);
         $Category = htmlspecialchars($Category);
@@ -44,7 +40,21 @@ class CreateMaterialController extends CreateMaterialModel implements RulesForCo
         try {
             $result->Insert($Type,$Category,$Name,$Author,$Description);
         }catch (\Exception $e){
-            echo $e;
+            die($e->getMessage());
+        }
+    }
+    public function UpdateMaterial($Material,$Type,$Category,$Name,$Author = "",$Description =""){
+        $Material = htmlspecialchars($Material);
+        $Type = htmlspecialchars($Type);
+        $Category = htmlspecialchars($Category);
+        $Name = htmlspecialchars($Name);
+        $Author = htmlspecialchars($Author);
+        $Description = htmlspecialchars($Description);
+        $result = new CreateMaterialModel();
+        try {
+            $result->Update($Material,$Type,$Category,$Name,$Author,$Description);
+        }catch (\Exception $e){
+            die($e->getMessage());
         }
     }
 }

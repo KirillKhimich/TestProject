@@ -10,14 +10,22 @@ class ListMaterialController extends ListMaterialModel implements RulesForContro
 {
 
 
-    public function ActionView()
-    {   $material = new ListMaterialModel();
-        $material = $material ->SelectAll();
+    public function ActionView(){
+        $material = new ListMaterialModel();
+        try {
+            $material = $material ->SelectAll();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         include __DIR__ . "/../Views/list-materials.php";
     }
     public function deleteMaterial($id){
         $id = htmlspecialchars($id);
         $result = new ListMaterialModel();
-        $result->Delete($id);
+        try {
+            $result->Delete($id);
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
     }
 }

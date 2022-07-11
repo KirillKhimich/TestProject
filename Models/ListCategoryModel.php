@@ -12,20 +12,24 @@ class ListCategoryModel extends Db
     private $db;
     public function __construct()
     {
-        $this -> db = new Db();
-
+        try {
+            $this -> db = new Db();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
     }
-
     protected function SelectAll()
     {
         $result = $this->db->DbQuery("SELECT * FROM categories ORDER BY categories.categoryTitle");
         $result = Db::arrayEnumeration($result);
-        return $result;
-    }
-    protected function Insert($name){
-        $this->db->DbQuery("INSERT INTO categories(id,categoryTitle) VALUES (NULL,'$name')");
+        if ($result === false){
+            throw new \Exception("Произошла ошибка при выборке категорий");
+        }else return $result;
     }
     protected function Delete($id){
-        $this->db->DbQuery("DELETE FROM categories WHERE id = '$id'");
+        $result = $this->db->DbQuery("DELETE FROM categories WHERE id = '$id'");
+        if ($result === false){
+            throw new \Exception("Произошла ошибка при удалении категорий");
+        }else return $result;
     }
 }

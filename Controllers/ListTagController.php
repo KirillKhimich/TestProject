@@ -12,12 +12,20 @@ class ListTagController extends ListTagModel implements RulesForControllers
     function ActionView()
     {
         $tag = new ListTagModel();
-        $tag = $tag ->SelectAll();
+        try {
+            $tag = $tag ->SelectAll();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
         include __DIR__ . "/../Views/list-tag.php";
     }
     function deleteTag($id){
         $id = htmlspecialchars($id);
         $result = new ListTagModel();
-        $result->Delete($id);
+        try {
+            $result = $result ->SelectAll();
+        }catch (\Exception $e){
+            die($e->getMessage());
+        }
     }
 }
