@@ -13,6 +13,10 @@ $routes = [
     "list-tag" => "Controllers\ListTagController",
     "view-material?viewMaterialId=$viewMaterialId" => "Controllers\ViewMaterialController",
 ];
+//Функция для проверки строки на URL
+function is_url($url) {
+    return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+}
 //Удаление элементов
 if (!empty($_POST['deleteId'])){
     $deleteType = explode("/",$_POST['deleteId']);
@@ -46,6 +50,7 @@ if (!empty($_GET['viewMaterialId'])){
         $createTag = new \Controllers\CreateTagController();
         $createTag->CreateTag($_POST['createTag']);
 }
+
 //Категории
     if (!empty($_POST['createCategory'])){
         $createCategory = new \Controllers\CreateCategoryController();
@@ -75,9 +80,10 @@ if (!empty($_GET['viewMaterialId'])){
         $addLinksLink = $_POST['addLinksLink'];
         $addLinksTitle = $_POST['addLinksTitle'];
         $checkGETId = $_POST['checkGETId'];
-        $addLink = new \Controllers\ViewMaterialController();
-        $addLink->link($checkGETId,$addLinksTitle,$addLinksLink);
-
+        if (is_url($addLinksLink) !== NULL){
+            $addLink = new \Controllers\ViewMaterialController();
+            $addLink->link($checkGETId,$addLinksTitle,$addLinksLink);
+        }
     }
 //Виды
 include_once "Views/header.php";

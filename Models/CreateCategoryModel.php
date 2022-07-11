@@ -21,5 +21,4 @@ class CreateCategoryModel extends Db
             throw new \Exception("Произошла ошибка при записи категорий в базу данных");
         }
     }
-
 }

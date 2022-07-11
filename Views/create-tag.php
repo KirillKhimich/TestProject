@@ -9,8 +9,7 @@
                                 Пожалуйста, заполните поле
                             </div>
                         </div>
-                        <button class="btn btn-primary" name="asdas" type="submit">Добавить</button>
+                        <button class="btn btn-primary" type="submit">Добавить</button>
                     </form>
                 </div>
             </div>
-
