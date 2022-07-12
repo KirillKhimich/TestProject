@@ -1,7 +1,9 @@
 <?php
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
 //Композер
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/additionalFunctions/find.php';
 //Пути для Роутера
 $viewMaterialId = $_GET['viewMaterialId'];
 $viewTagId = $_GET['viewTagId'];
