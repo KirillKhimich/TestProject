@@ -1,11 +1,12 @@
 <?php
 //Композер
 require_once __DIR__ . '/vendor/autoload.php';
-
+require_once __DIR__ . '/additionalFunctions/find.php';
 //Пути для Роутера
 $viewMaterialId = $_GET['viewMaterialId'];
 $viewTagId = $_GET['viewTagId'];
 $routes = [
+    "" =>"Controllers\ListMaterialController",
     "create-tag"=> "Controllers\CreateTagController",
     "create-category" => "Controllers\CreateCategoryController",
     "create-material" => "Controllers\CreateMaterialController",

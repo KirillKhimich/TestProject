@@ -1,25 +1,3 @@
-//Функция поиска
-$('#finderInput').on("change input ",function () {
-    let txtlen = $(this).val().length;
-    const inputValue = $(this).val();
-    $('.searchTr').hide();
-    if (txtlen > 0){
-    $('.searchTr').each(function(){
-        let array = [$(this).html()];
-        $.each(array, function(key, value) {
-            if (value.indexOf(inputValue) != -1){
-                $('.searchTr').html(value).show();
-                console.log(value)
-
-            }else {
-
-            }
-        });
-    });
-    }else{
-        $('.table .searchTr').show();
-    }
-});
 //Функция для проверки GET запроса
 $.urlParam = function(name){
     let results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -230,7 +208,6 @@ $('.editLink').click(function (){
         let updateLinksLink = $('#updateLinksLink').val();
         let updateLinksTitle = $('#updateLinksTitle').val();
         let checkOnUrl = updateLinksLink.match(/(^http:\/\/)|(^www)|(https:\/\/)/) != null;
-        let checkGETId = $.urlParam("viewMaterialId")
         if (updateLinksLink.length > 0){
             if (checkOnUrl === true) {
                 $.post({

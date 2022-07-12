@@ -3,11 +3,11 @@
             <a class="btn btn-primary mb-4" href="create-material" role="button">Добавить и редактировать</a>
             <div class="row">
                 <div class="col-md-8">
-                    <form>
+                    <form id="finderForm" name=finderForm">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="finderInput" placeholder=""
+                            <input type="text" class="form-control" name="finderInput" id="finderInput" placeholder=""
                                    aria-label="Example text with button addon" aria-describedby="button-addon1">
-                            <button class="btn btn-primary" type="button" id="button-addon1">Искать</button>
+                            <button class="btn btn-primary" type="submit" id="finderButton">Искать</button>
                         </div>
                     </form>
                 </div>
@@ -27,10 +27,10 @@
                     <?php foreach ($material as $key => $value):?>
 
                     <tr class="searchTr">
-                        <td class="searchTd"><a data-id="<?=$value['id']?>" href="view-material?viewMaterialId=<?=$value['id']?>"><?=$value['title']?></a></td>
-                        <td><span><?=$value['author']?></span></td>
-                        <td><?=$value['categoryTitle']?></td>
-                        <td><?=$value['typeTitle']?></td>
+                        <td class="searchTd" ><a  href="view-material?viewMaterialId=<?=$value['id']?>"><?=$value['title']?></a></td>
+                        <td class="searchTd"><span><?=$value['author']?></span></td>
+                        <td class="searchTd"><?=$value['categoryTitle']?></td>
+                        <td class="searchTd" ><?=$value['typeTitle']?></td>
                         <td class="text-nowrap text-end">
                             <a href="create-material" class="text-decoration-none me-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -51,4 +51,5 @@
                     <?php endforeach;?>
                     </tbody>
                 </table>
+                <div id="result"></div>
             </div>

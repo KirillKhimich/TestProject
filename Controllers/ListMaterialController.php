@@ -28,4 +28,12 @@ class ListMaterialController extends ListMaterialModel implements RulesForContro
             die($e->getMessage());
         }
     }
+    public function searchMaterial($searchString){
+        $result = new ListMaterialModel();
+        try {
+            $result = $result->Search($searchString);
+        }catch (\Exception $e){
+            die($e ->getMessage());
+        }
+    }
 }
