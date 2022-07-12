@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 12 2022 г., 13:19
+-- Время создания: Июл 12 2022 г., 14:07
 -- Версия сервера: 5.7.33-log
 -- Версия PHP: 7.4.27
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `test_project_db`
 --
+CREATE DATABASE IF NOT EXISTS `test_project_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `test_project_db`;
 
 -- --------------------------------------------------------
 
@@ -28,8 +30,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `categoryTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                              `id` int(11) NOT NULL,
+                              `categoryTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -61,8 +63,8 @@ INSERT INTO `categories` (`id`, `categoryTitle`) VALUES
 --
 
 CREATE TABLE `cloudtags` (
-  `materialId` int(11) NOT NULL,
-  `tagId` int(11) NOT NULL
+                             `materialId` int(11) NOT NULL,
+                             `tagId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -85,10 +87,10 @@ INSERT INTO `cloudtags` (`materialId`, `tagId`) VALUES
 --
 
 CREATE TABLE `links` (
-  `id` int(11) NOT NULL,
-  `materialId` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link` varchar(755) COLLATE utf8mb4_unicode_ci NOT NULL
+                         `id` int(11) NOT NULL,
+                         `materialId` int(11) NOT NULL,
+                         `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                         `link` varchar(755) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -109,12 +111,12 @@ INSERT INTO `links` (`id`, `materialId`, `title`, `link`) VALUES
 --
 
 CREATE TABLE `materials` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `author` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(455) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `typeId` int(11) NOT NULL,
-  `categoryId` int(11) NOT NULL
+                             `id` int(11) NOT NULL,
+                             `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                             `author` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                             `description` varchar(455) COLLATE utf8mb4_unicode_ci NOT NULL,
+                             `typeId` int(11) NOT NULL,
+                             `categoryId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -134,8 +136,8 @@ INSERT INTO `materials` (`id`, `title`, `author`, `description`, `typeId`, `cate
 --
 
 CREATE TABLE `tags` (
-  `id` int(11) NOT NULL,
-  `tagsTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                        `id` int(11) NOT NULL,
+                        `tagsTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -155,8 +157,8 @@ INSERT INTO `tags` (`id`, `tagsTitle`) VALUES
 --
 
 CREATE TABLE `types` (
-  `id` int(11) NOT NULL,
-  `typeTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+                         `id` int(11) NOT NULL,
+                         `typeTitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -179,13 +181,13 @@ INSERT INTO `types` (`id`, `typeTitle`) VALUES
 -- Индексы таблицы `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `cloudtags`
 --
 ALTER TABLE `cloudtags`
-  ADD PRIMARY KEY (`materialId`,`tagId`),
+    ADD PRIMARY KEY (`materialId`,`tagId`),
   ADD KEY `materialIdIdx` (`materialId`),
   ADD KEY `fkTaglId` (`tagId`);
 
@@ -193,14 +195,14 @@ ALTER TABLE `cloudtags`
 -- Индексы таблицы `links`
 --
 ALTER TABLE `links`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `fkMaterialIdLinks` (`materialId`);
 
 --
 -- Индексы таблицы `materials`
 --
 ALTER TABLE `materials`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `fkCategorsId` (`categoryId`),
   ADD KEY `fkTypeId` (`typeId`);
 
@@ -208,13 +210,13 @@ ALTER TABLE `materials`
 -- Индексы таблицы `tags`
 --
 ALTER TABLE `tags`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `types`
 --
 ALTER TABLE `types`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -224,31 +226,31 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT для таблицы `links`
 --
 ALTER TABLE `links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT для таблицы `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -258,20 +260,20 @@ ALTER TABLE `types`
 -- Ограничения внешнего ключа таблицы `cloudtags`
 --
 ALTER TABLE `cloudtags`
-  ADD CONSTRAINT `fkMaterialId` FOREIGN KEY (`materialId`) REFERENCES `materials` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `fkMaterialId` FOREIGN KEY (`materialId`) REFERENCES `materials` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fkTaglId` FOREIGN KEY (`tagId`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `links`
 --
 ALTER TABLE `links`
-  ADD CONSTRAINT `fkMaterialIdLinks` FOREIGN KEY (`materialId`) REFERENCES `materials` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `fkMaterialIdLinks` FOREIGN KEY (`materialId`) REFERENCES `materials` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `materials`
 --
 ALTER TABLE `materials`
-  ADD CONSTRAINT `fkCategorsId` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `fkCategorsId` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fkTypeId` FOREIGN KEY (`typeId`) REFERENCES `types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
