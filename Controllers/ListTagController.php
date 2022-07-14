@@ -23,7 +23,7 @@ class ListTagController extends ListTagModel implements RulesForControllers
         $id = htmlspecialchars($id);
         $result = new ListTagModel();
         try {
-            $result = $result ->SelectAll();
+            $result ->Delete($id);
         }catch (\Exception $e){
             die($e->getMessage());
         }

@@ -11,11 +11,11 @@ $('.delete').click(function (){
     let deleteId = $(this).attr('data-id');
     $('#confirmDeleteButton').click(function (){
         $.post({
-            url: "../../index.php",
+            url: "/index.php",
             data: {deleteId},
             datatype: "json",
             success: function () {
-                location.reload();
+                location.reload()
             }
         })
     })
@@ -26,7 +26,7 @@ $('#createCategoryForm').submit(function () {
     let count = $('#createCategory').val().length;
     if (count > 0){
             $.post({
-                url:"../../index.php",
+                url:"/index.php",
                 data: $("#createCategoryForm").serialize(),
                 datatype:"json",
                 success: function () {
@@ -43,7 +43,7 @@ $('#createTagForm').submit(function () {
     let count = $('#createTag').val().length;
     if (count > 0){
         $.post({
-            url:"../../index.php",
+            url:"/index.php",
             data: $("#createTagForm").serialize(),
             datatype:"json",
             success: function () {
@@ -71,7 +71,7 @@ $('#createMaterialForm').submit(function (){
         }
         if (selectCategoryId > 0 && selectTypeId > 0 && inputName > 0){
             $.post({
-                url:"../../index.php",
+                url:"/index.php",
                 data: $("#createMaterialForm").serialize(),
                 datatype:"json",
                 success: function () {
@@ -87,7 +87,7 @@ $('#addTagButton').click(function (){
         let checkGETId = $.urlParam("viewMaterialId")
         if (selectAddTag > 0){
             $.post({
-                url:"../../index.php",
+                url:"/index.php",
                 data:{selectAddTag : selectAddTag,checkGETId:checkGETId},
                 datatype:"json",
                 success: function () {
@@ -105,7 +105,7 @@ $('#addMaterialLink').click(function () {
     if (addLinksLink.length > 0){
         if (checkOnUrl === true) {
             $.post({
-                url: "../../index.php",
+                url: "/index.php",
                 data: {addLinksLink : addLinksLink,addLinksTitle: addLinksTitle,checkGETId:checkGETId},
                 datatype: "json",
                 success: function () {
@@ -134,7 +134,7 @@ $('#formUpdateCategory').submit(function (){
     }
     if (selectUpdateCategory > 0 && inputUpdateCategory > 0) {
         $.post({
-            url: "../../index.php",
+            url: "/index.php",
             data: $(this).serialize(),
             datatype: "json",
             success: function () {
@@ -156,7 +156,7 @@ $('#formUpdateTag').submit(function (){
     }
     if (selectUpdateTag > 0 && inputUpdateTag > 0) {
         $.post({
-            url: "../../index.php",
+            url: "/index.php",
             data: $(this).serialize(),
             datatype: "json",
             success: function () {
@@ -186,7 +186,7 @@ $('#updateMaterialForm').submit(function (){
     }
     if (updateMaterialId > 0 && updateTypeId > 0 && updateCategoryId > 0 && inputUpdateMaterialName > 0){
         $.post({
-            url:"../../index.php",
+            url:"/index.php",
             data: $("#updateMaterialForm").serialize(),
             datatype:"json",
             success: function () {
@@ -207,11 +207,11 @@ $('.editLink').click(function (){
     $('#updateMaterialLink').click(function () {
         let updateLinksLink = $('#updateLinksLink').val();
         let updateLinksTitle = $('#updateLinksTitle').val();
-        let checkOnUrl = updateLinksLink.match(/(^http:\/\/)|(^www)|(https:\/\/)/) != null;
+        let checkOnUrl = updateLinksLink.match(/(^http(s)?:\/\/)/) != null;
         if (updateLinksLink.length > 0){
             if (checkOnUrl === true) {
                 $.post({
-                    url: "../../index.php",
+                    url: "/index.php",
                     data: {updateLinksLink : updateLinksLink,updateLinksTitle: updateLinksTitle,linkId:linkId},
                     datatype: "json",
                     success: function () {

@@ -30,7 +30,7 @@ class CreateMaterialController extends CreateMaterialModel implements RulesForCo
         include __DIR__ . "/../Views/create-material.php";
     }
 
-    public function CreateMaterial($Type,$Category,$Name,$Author = "",$Description =""){
+    public function AddMaterial($Type,$Category,$Name,$Author = "",$Description =""){
         $Type = htmlspecialchars($Type);
         $Category = htmlspecialchars($Category);
         $Name = htmlspecialchars($Name);
@@ -43,7 +43,7 @@ class CreateMaterialController extends CreateMaterialModel implements RulesForCo
             die($e->getMessage());
         }
     }
-    public function UpdateMaterial($Material,$Type,$Category,$Name,$Author = "",$Description =""){
+    public function UpdateMaterial($Material,$Type,$Category,$Name,$Author,$Description){
         $Material = htmlspecialchars($Material);
         $Type = htmlspecialchars($Type);
         $Category = htmlspecialchars($Category);

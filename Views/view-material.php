@@ -4,7 +4,7 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Авторы</p>
-                        <p class="col"><?php if (!empty($value['author'])){?><?=$value['author']?><?php }else{?>Автор неизвестен<?php }?></p>
+                        <p class="col"><?php if (!empty($value['author'])){?><?=$value['author']?><?php }else echo "Автор не указан"?></p>
                     </div>
                     <div class="d-flex text-break">
                         <p class="col fw-bold mw-25 mw-sm-30 me-2">Тип</p>

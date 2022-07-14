@@ -1,17 +1,6 @@
 
             <h1 class="my-md-5 my-4">Материалы</h1>
             <a class="btn btn-primary mb-4" href="create-material" role="button">Добавить и редактировать</a>
-            <div class="row">
-                <div class="col-md-8">
-                    <form id="finderForm" name=finderForm">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="finderInput" id="finderInput" placeholder=""
-                                   aria-label="Example text with button addon" aria-describedby="button-addon1">
-                            <button class="btn btn-primary" type="submit" id="finderButton">Искать</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -28,7 +17,7 @@
 
                     <tr class="searchTr">
                         <td class="searchTd" ><a  href="view-material?viewMaterialId=<?=$value['id']?>"><?=$value['title']?></a></td>
-                        <td class="searchTd"><span><?=$value['author']?></span></td>
+                        <td class="searchTd"><span><?php if (!empty($value['author'])){?><?=$value['author']?><?php }else echo "Автор не указан"?></span></td>
                         <td class="searchTd"><?=$value['categoryTitle']?></td>
                         <td class="searchTd" ><?=$value['typeTitle']?></td>
                         <td class="text-nowrap text-end">

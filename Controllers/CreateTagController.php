@@ -20,7 +20,7 @@ class CreateTagController extends CreateTagModel implements RulesForControllers
         }
         include __DIR__ . "/../Views/create-tag.php";
     }
-    public function CreateTag($name)
+    public function AddTag($name)
     {
         $name = htmlspecialchars($name);
         $result = new CreateTagModel();

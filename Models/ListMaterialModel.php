@@ -12,7 +12,7 @@ class ListMaterialModel extends Db
     public function __construct()
     {
         try {
-            $this -> db = new Db();
+            $this -> db = Db::getInstance();
         }catch (\Exception $e){
             die($e->getMessage());
         }

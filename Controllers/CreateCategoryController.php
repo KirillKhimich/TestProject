@@ -17,7 +17,7 @@ class CreateCategoryController extends CreateCategoryModel implements RulesForCo
         }
         include __DIR__ . "/../Views/create-category.php";
     }
-    public function CreateCategory($name)
+    public function AddCategory($name)
     {
             $name = htmlspecialchars($name);
             $result = new CreateCategoryModel();
