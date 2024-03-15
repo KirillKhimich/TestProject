@@ -2,8 +2,12 @@
 //Композер
 require_once __DIR__ . '/vendor/autoload.php';
 //Пути для Роутера
-if (is_string($_GET['viewMaterialId']))$viewMaterialId = $_GET['viewMaterialId'];
-if (is_string($_GET['viewTagId']))$viewTagId = $_GET['viewTagId'];
+if (!empty($_GET['viewMaterialId'])){
+    $viewMaterialId = $_GET['viewMaterialId'];
+}
+if (!empty($_GET['viewTagId'])){
+    $viewTagId = $_GET['viewTagId'];
+}
 $routes = [
     "" =>"Controllers\ListMaterialController",
     "create-tag"=> "Controllers\CreateTagController",
@@ -12,10 +16,9 @@ $routes = [
     "list-category" => "Controllers\ListCategoryController",
     "list-materials" => "Controllers\ListMaterialController",
     "list-tag" => "Controllers\ListTagController",
-    "view-material?viewMaterialId=$viewMaterialId" => "Controllers\ViewMaterialController",
-    "tag-material?viewTagId=$viewTagId" =>"Controllers\TagMaterialController",
+    "view-material?viewMaterialId=".($viewMaterialId ?? '') => "Controllers\ViewMaterialController",
+    "tag-material?viewTagId=".($viewTagId ?? '') =>"Controllers\TagMaterialController",
 ];
-
 //Функция для проверки строки на URL
 function is_url($url) {
     return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);

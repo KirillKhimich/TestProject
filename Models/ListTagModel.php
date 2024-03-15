@@ -4,8 +4,8 @@
 namespace Models;
 
 
+
 use Core\Db;
-use mysql_xdevapi\Exception;
 
 class ListTagModel extends Db
 {
